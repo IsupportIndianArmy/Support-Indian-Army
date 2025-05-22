@@ -22,27 +22,30 @@
     }
 
     .whatsapp-button {
-      margin-top: 25px;
+      margin-top: 30px;
       display: inline-flex;
       align-items: center;
-      background-color: #25D366;
+      justify-content: center;
+      background: linear-gradient(to right, #25D366, #1ebe5d);
       color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
+      padding: 12px 25px;
+      border-radius: 50px;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1em;
-      transition: background-color 0.3s ease;
+      font-size: 1.1em;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .whatsapp-button:hover {
-      background-color: #1ebe5d;
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     }
 
     .whatsapp-button img {
-      width: 20px;
-      height: 20px;
-      margin-right: 10px;
+      width: 28px;
+      height: 28px;
+      margin-right: 12px;
     }
 
     #message {
@@ -66,15 +69,13 @@
 <body>
 
   <h1>🇮🇳 I Support Indian Army 🇮🇳</h1>
-  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aH..." alt="Indian Army">
+  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/..." alt="Indian Army">
 
-  <!-- WhatsApp Share Button with Logo -->
-  <div class="whatsapp-share">
-    <a class="whatsapp-button" href="https://wa.me/?text=🇮🇳%20Main%20Indian%20Army%20ko%20support%20karta%20hoon!%20Dekhiye%20yeh:%20https://isupportindianarmy.github.io/Support-Indian-Army/" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp Logo">
-      WhatsApp Par Share Karein
-    </a>
-  </div>
+  <!-- WhatsApp Share Button -->
+  <a class="whatsapp-button" href="https://wa.me/?text=🇮🇳%20Main%20Indian%20Army%20ko%20support%20karta%20hoon!%20Dekhiye%20yeh:%20https://isupportindianarmy.github.io/Support-Indian-Army/" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp Logo">
+    WhatsApp Par Share Karein
+  </a>
 
   <div id="message"></div>
 
@@ -83,7 +84,7 @@
     const from = urlParams.get('from');
 
     if (from) {
-      document.getElementById('message').innerHTML = `💖 <b>I support Indian Army - From ${decodeURIComponent(from)}</b>`;
+      document.getElementById('message').innerHTML = 💖 <b>I support Indian Army - From ${decodeURIComponent(from)}</b>;
     }
   </script>
 
