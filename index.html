@@ -90,32 +90,38 @@
 
   <!-- Name input -->
   <div>
-    <input type="text" id="userName" placeholder="Apna Naam Likhiye" oninput="updateMessage()" />
+    <input type="text" id="userName" placeholder="Apna Naam Likhiye" oninput="updateLink()" />
   </div>
 
-  <!-- Message -->
+  <!-- Message from shared link -->
   <div id="message"></div>
 
   <!-- WhatsApp Share Button -->
-  <a class="whatsapp-button" id="whatsappShare" href="https://wa.me/?text=🇮🇳%20Main%20Indian%20Army%20ko%20support%20karta%20hoon!%20Dekhiye%20yeh:%20https://isupportindianarmy.github.io/Support-Indian-Army/" target="_blank">
+  <a class="whatsapp-button" id="whatsappShare" href="#" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
     WhatsApp Par Share Karein
   </a>
 
   <script>
-    function updateMessage() {
-      const name = document.getElementById('userName').value.trim();
-      const message = document.getElementById('message');
-      const shareBtn = document.getElementById('whatsappShare');
+    const shareBtn = document.getElementById('whatsappShare');
+    const userNameInput = document.getElementById('userName');
+    const message = document.getElementById('message');
 
-      if (name) {
-        message.innerHTML = 💖 <b>${name} supports Indian Army</b>;
-        const shareText = 🇮🇳 ${name} Indian Army ko support karta hai! Dekhiye: https://isupportindianarmy.github.io/Support-Indian-Army/;
-        shareBtn.href = https://wa.me/?text=${encodeURIComponent(shareText)};
-      } else {
-        message.innerHTML = "";
-        shareBtn.href = https://wa.me/?text=🇮🇳 Main Indian Army ko support karta hoon! Dekhiye yeh: https://isupportindianarmy.github.io/Support-Indian-Army/;
-      }
+    function updateLink() {
+      const name = userNameInput.value.trim();
+      const encodedName = encodeURIComponent(name);
+      const pageURL = window.location.origin + window.location.pathname;
+      const fullLink = ${pageURL}?from=${encodedName};
+
+      const shareText = 🇮🇳 Main Indian Army ko support karta hoon! Dekhiye yeh: ${fullLink};
+      shareBtn.href = https://wa.me/?text=${encodeURIComponent(shareText)};
+    }
+
+    // When page opens with ?from=name
+    const urlParams = new URLSearchParams(window.location.search);
+    const from = urlParams.get('from');
+    if (from) {
+      message.innerHTML = 💖 <b>${decodeURIComponent(from)} supports Indian Army</b>;
     }
   </script>
 
