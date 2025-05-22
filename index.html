@@ -6,7 +6,7 @@
   <title>I Support Indian Army</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       background: linear-gradient(to bottom, #000000, #1a1a1a);
       color: #fff;
       text-align: center;
@@ -17,6 +17,7 @@
     h1 {
       font-size: 2.2em;
       color: #ff9933;
+      margin-bottom: 10px;
     }
 
     img {
@@ -86,14 +87,16 @@
 <body>
 
   <h1>🇮🇳 I Support Indian Army 🇮🇳</h1>
+
+  <!-- Indian Army Image -->
   <img src="https://i.ibb.co/svtFSFdL/d39845501ccb74972e0a908b40868910.jpg" alt="Indian Army">
 
-  <!-- Name input -->
+  <!-- Name Input -->
   <div>
     <input type="text" id="userName" placeholder="Apna Naam Likhiye" oninput="updateLink()" />
   </div>
 
-  <!-- Message from shared link -->
+  <!-- Personalized Message -->
   <div id="message"></div>
 
   <!-- WhatsApp Share Button -->
@@ -102,6 +105,7 @@
     WhatsApp Par Share Karein
   </a>
 
+  <!-- Script -->
   <script>
     const shareBtn = document.getElementById('whatsappShare');
     const userNameInput = document.getElementById('userName');
@@ -123,6 +127,9 @@
     if (from) {
       message.innerHTML = 💖 <b>${decodeURIComponent(from)} supports Indian Army</b>;
     }
+
+    // Ensure share link is available even without typing (empty by default)
+    updateLink();
   </script>
 
 </body>
