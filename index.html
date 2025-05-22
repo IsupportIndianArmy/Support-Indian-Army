@@ -21,6 +21,15 @@
       margin-top: 20px;
     }
 
+    input {
+      padding: 10px;
+      margin-top: 20px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: none;
+      width: 80%;
+    }
+
     .whatsapp-button {
       margin-top: 30px;
       display: inline-flex;
@@ -69,7 +78,13 @@
 <body>
 
   <h1>🇮🇳 I Support Indian Army 🇮🇳</h1>
-  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/..." alt="Indian Army">
+
+  <img src="https://i.ibb.co/svtFSFdL/d39845501ccb74972e0a908b40868910.jpg" alt="Indian Army">
+
+  <!-- Input for user name -->
+  <div id="inputSection">
+    <input type="text" id="userName" placeholder="Apna Naam Likhiye" oninput="updateMessage()" />
+  </div>
 
   <!-- WhatsApp Share Button -->
   <a class="whatsapp-button" href="https://wa.me/?text=🇮🇳%20Main%20Indian%20Army%20ko%20support%20karta%20hoon!%20Dekhiye%20yeh:%20https://isupportindianarmy.github.io/Support-Indian-Army/" target="_blank">
@@ -77,14 +92,18 @@
     WhatsApp Par Share Karein
   </a>
 
+  <!-- Message Section -->
   <div id="message"></div>
 
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const from = urlParams.get('from');
-
-    if (from) {
-      document.getElementById('message').innerHTML = 💖 <b>I support Indian Army - From ${decodeURIComponent(from)}</b>;
+    function updateMessage() {
+      const name = document.getElementById('userName').value.trim();
+      const messageDiv = document.getElementById('message');
+      if (name) {
+        messageDiv.innerHTML = 💖 <b>I support Indian Army - From ${name}</b>;
+      } else {
+        messageDiv.innerHTML = '';
+      }
     }
   </script>
 
