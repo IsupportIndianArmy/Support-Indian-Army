@@ -10,7 +10,7 @@
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
       color: white;
-      background-image: url('indian-army.jpg'); /* Ensure this image is in same folder */
+      background-image: url('indian-army.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -21,6 +21,9 @@
       background-color: rgba(0, 0, 0, 0.7);
       min-height: 100vh;
       padding-top: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1, h2 {
@@ -52,6 +55,7 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      margin: 10px;
     }
 
     .message {
@@ -65,6 +69,16 @@
       from { opacity: 0.5; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(-5px); }
     }
+
+    .vote-section {
+      margin-top: 30px;
+    }
+
+    .vote-count {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #ffeb3b;
+    }
   </style>
 </head>
 <body>
@@ -76,6 +90,11 @@
       <input type="text" id="nameInput" placeholder="Aapka Naam" />
       <br />
       <button onclick="shareOnWhatsApp()">📲 WhatsApp पर Share करें</button>
+    </div>
+
+    <div class="vote-section">
+      <button onclick="castVote()">🗳️ Vote Now</button>
+      <div class="vote-count">Total Votes: <span id="voteCount">0</span></div>
     </div>
   </div>
 
@@ -104,6 +123,21 @@
 
       window.open(whatsappUrl, '_blank');
     }
+
+    // Vote logic with localStorage
+    function castVote() {
+      let votes = localStorage.getItem("armyVotes");
+      votes = votes ? parseInt(votes) + 1 : 1;
+      localStorage.setItem("armyVotes", votes);
+      updateVoteDisplay();
+    }
+
+    function updateVoteDisplay() {
+      const votes = localStorage.getItem("armyVotes") || 0;
+      document.getElementById("voteCount").textContent = votes;
+    }
+
+    updateVoteDisplay();
   </script>
 </body>
 </html>
