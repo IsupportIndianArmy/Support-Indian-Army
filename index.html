@@ -1,23 +1,4 @@
-<script type="text/javascript">
-	atOptions = {
-		'key' : '5f9084c9366a5e71fb17d1ed13552f45',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/5f9084c9366a5e71fb17d1ed13552f45/invoke.js"></script>
-<script type="text/javascript">
-	atOptions = {
-		'key' : '5f9084c9366a5e71fb17d1ed13552f45',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/5f9084c9366a5e71fb17d1ed13552f45/invoke.js"></script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -29,20 +10,25 @@
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
       color: white;
-      background-image: url('indian-army.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      background-color: #000; /* Black background */
       height: 100vh;
     }
 
     .overlay {
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.9);
       min-height: 100vh;
-      padding-top: 50px;
+      padding-top: 30px;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    .front-image {
+      width: 80%;
+      max-width: 350px; /* Smaller size */
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+      margin-bottom: 20px;
     }
 
     h1, h2 {
@@ -102,8 +88,14 @@
 </head>
 <body>
   <div class="overlay">
+
+    <!-- Foreground image -->
+    <img src="indian-army.jpg" alt="Indian Army" class="front-image" />
+
+    <!-- Message area -->
     <div id="output"></div>
 
+    <!-- Input section -->
     <div id="nameInputSection">
       <h2>Apna Naam Likhiye</h2>
       <input type="text" id="nameInput" placeholder="Aapka Naam" />
@@ -111,10 +103,12 @@
       <button onclick="shareOnWhatsApp()">📲 WhatsApp पर Share करें</button>
     </div>
 
+    <!-- Voting section -->
     <div class="vote-section">
       <button onclick="castVote()">🗳️ Vote Now</button>
       <div class="vote-count">Total Votes: <span id="voteCount">0</span></div>
     </div>
+
   </div>
 
   <script>
@@ -143,7 +137,6 @@
       window.open(whatsappUrl, '_blank');
     }
 
-    // Vote logic with localStorage
     function castVote() {
       let votes = localStorage.getItem("armyVotes");
       votes = votes ? parseInt(votes) + 1 : 1;
