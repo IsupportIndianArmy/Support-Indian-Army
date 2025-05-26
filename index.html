@@ -3,134 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>I Support Indian Army</title>
+  <title>Support Indian Army</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom, #000000, #1a1a1a);
-      color: #fff;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
       text-align: center;
-      padding: 20px;
-      animation: fadeIn 2s ease-in;
+      color: white;
+      background-image: url('indian-army.jpg'); /* Ensure this image is in same folder */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
     }
 
-    h1 {
-      font-size: 2.2em;
-      color: #ff9933;
-      margin-bottom: 10px;
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      min-height: 100vh;
+      padding-top: 50px;
     }
 
-    img {
-      width: 100%;
-      max-width: 600px;
-      border-radius: 10px;
-      margin-top: 20px;
-      border: 3px solid #fff;
+    h1, h2 {
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+      100% { opacity: 0.6; transform: scale(1); }
     }
 
     input {
-      margin-top: 25px;
-      padding: 12px;
-      font-size: 1em;
-      border-radius: 8px;
-      border: none;
+      padding: 10px;
+      font-size: 1rem;
+      margin: 10px 0;
       width: 80%;
       max-width: 300px;
+      border: none;
+      border-radius: 8px;
     }
 
-    #message {
-      margin-top: 30px;
-      font-size: 1.5em;
-      font-weight: bold;
-      color: #00ffcc;
-      animation: slideIn 1s ease-in-out;
-    }
-
-    .whatsapp-button {
-      margin-top: 25px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(to right, #25D366, #1ebe5d);
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #25D366;
       color: white;
-      padding: 12px 25px;
-      border-radius: 50px;
-      text-decoration: none;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
       font-weight: bold;
-      font-size: 1.1em;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .whatsapp-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-    }
-
-    .whatsapp-button img {
-      width: 26px;
-      height: 26px;
-      margin-right: 10px;
-    }
-
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .message {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      font-weight: bold;
+      animation: fadeIn 2s ease-in-out infinite alternate;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0.5; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(-5px); }
     }
   </style>
 </head>
 <body>
+  <div class="overlay">
+    <div id="output"></div>
 
-  <h1>🇮🇳 I Support Indian Army 🇮🇳</h1>
-
-  <!-- Indian Army Image -->
-  <img src="https://i.ibb.co/svtFSFdL/d39845501ccb74972e0a908b40868910.jpg" alt="Indian Army">
-
-  <!-- Name Input -->
-  <div>
-    <input type="text" id="userName" placeholder="Apna Naam Likhiye" oninput="updateLink()" />
+    <div id="nameInputSection">
+      <h2>Apna Naam Likhiye</h2>
+      <input type="text" id="nameInput" placeholder="Aapka Naam" />
+      <br />
+      <button onclick="shareOnWhatsApp()">📲 WhatsApp पर Share करें</button>
+    </div>
   </div>
 
-  <!-- Personalized Message -->
-  <div id="message"></div>
-
-  <!-- WhatsApp Share Button -->
-  <a class="whatsapp-button" id="whatsappShare" href="#" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
-    WhatsApp Par Share Karein
-  </a>
-
-  <!-- Script -->
   <script>
-    const shareBtn = document.getElementById('whatsappShare');
-    const userNameInput = document.getElementById('userName');
-    const message = document.getElementById('message');
-
-    function updateLink() {
-      const name = userNameInput.value.trim();
-      const encodedName = encodeURIComponent(name);
-      const pageURL = window.location.origin + window.location.pathname;
-      const fullLink = ${pageURL}?from=${encodedName};
-
-      const shareText = 🇮🇳 Main Indian Army ko support karta hoon! Dekhiye yeh: ${fullLink};
-      shareBtn.href = https://wa.me/?text=${encodeURIComponent(shareText)};
-    }
-
-    // When page opens with ?from=name
     const urlParams = new URLSearchParams(window.location.search);
-    const from = urlParams.get('from');
-    if (from) {
-      message.innerHTML = 💖 <b>${decodeURIComponent(from)} supports Indian Army</b>;
+    const senderName = urlParams.get('name');
+
+    if (senderName) {
+      document.getElementById('output').innerHTML = `
+        <h1 class="message">🇮🇳 ${decodeURIComponent(senderName)} supports Indian Army 🇮🇳</h1>
+      `;
     }
 
-    // Ensure share link is available even without typing (empty by default)
-    updateLink();
-  </script>
+    function shareOnWhatsApp() {
+      const name = document.getElementById("nameInput").value.trim();
+      if (!name) {
+        alert("Kripya apna naam likhiye.");
+        return;
+      }
 
+      const encodedName = encodeURIComponent(name);
+      const currentUrl = window.location.origin + window.location.pathname;
+      const shareLink = `${currentUrl}?name=${encodedName}`;
+      const message = `🇮🇳 ${name} supports Indian Army! Dekhiye: ${shareLink}`;
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+
+      window.open(whatsappUrl, '_blank');
+    }
+  </script>
 </body>
 </html>
